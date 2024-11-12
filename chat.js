@@ -1,33 +1,32 @@
-document.getElementById('sendBtn').addEventListener('click', function () {
-  const input = document.getElementById('chatInput');
-  const messageText = input.value.trim();
+const main = document.querySelector("main")
+const input = document.querySelector("input")
+const button = document.querySelector("button")
 
-  if (messageText === "") {
-    alert("Por favor, digite uma mensagem.");
-    return;
-  }
+function mostrarMensagem(owner, message, timestamp, nick) {
+  main.innerHTML += `
+  <div class="message owner" ${owner ? "owner" : ""}">
+    <div class="content">${message}</div>
+    <div class="nick">${nick}</div>
+    <div class="time">${timestamp}</div>
+  `
+}
 
-  const messageContainer = document.createElement('div');
-  messageContainer.classList.add('message', 'owner');
+const ws = new WebSocket("ws://192.168.120.53:4000")
 
-  const messageContent = document.createElement('div');
-  messageContent.classList.add('content');
-  messageContent.textContent = messageText;
+ws.addEventListener("open", () => console.log("Conectado"))
+ws.addEventListener("close", () => console.log("Desconectado"))
 
-  const messageTime = document.createElement('div');
-  messageTime.classList.add('time');
-  
-  const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  messageTime.textContent = currentTime;
+ws.addEventListener("message", (event) => {
+  const data = JSON.parse(event.data)
+  mostrarMensagem(false, data.message, data.timestamp, data.nick)
+})
 
-  messageContainer.appendChild(messageContent);
-  messageContainer.appendChild(messageTime);
+ws.addEventListener("close", () => {
+  console.log("Desconectado")
+})
 
-  const chatMain = document.querySelector('main');
-  chatMain.appendChild(messageContainer);
-
-  input.value = '';
-  input.focus();
-
-  chatMain.scrollTop = chatMain.scrollHeight;
-});
+button.addEventListener("click", () => {
+  const message = input.value
+  ws.send(message)
+  input.value = ""
+})
