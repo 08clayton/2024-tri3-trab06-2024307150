@@ -1,0 +1,158 @@
+/* Reset geral de margens e paddings */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  box-sizing: border-box;
+}
+
+/* Definindo layout do corpo usando Grid */
+body {
+  display: grid;
+  grid-template-rows: 80px 1fr 60px;
+  grid-template-columns: 1fr;
+  height: 100vh;
+  background-color: #f4f7fb; /* Cor de fundo suave */
+  color: #333;
+}
+
+/* Estilização do cabeçalho */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: linear-gradient(120deg, #18e1fc, #7624d3);
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste para a imagem de avatar */
+header .thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Título no cabeçalho */
+header h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Estilização do link no cabeçalho */
+header a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  background-color: #7624d3;
+  padding: 6px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+header a:hover {
+  background-color: #18e1fc;
+}
+
+/* Estilização principal das mensagens */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Estilização de uma mensagem */
+main .message {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 10px 0;
+  max-width: 70%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+main .message:hover {
+  transform: scale(1.02);
+}
+
+main .message .time {
+  margin-top: 8px;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #777;
+  border-top: 1px solid #eee;
+  padding-top: 5px;
+}
+
+/* Estilo da mensagem de quem enviou */
+main .message.owner {
+  background-color: #007bff;
+  color: white;
+  justify-self: end;
+}
+
+/* Estilização do rodapé */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+footer input[type="text"] {
+  width: 85%;
+  padding: 10px;
+  border-radius: 30px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+footer input[type="text"]:focus {
+  border-color: #7624d3;
+}
+
+footer .bt-lindo {
+  background-color: #7624d3;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+footer .bt-lindo:hover {
+  background-color: #18e1fc;
+}
+
+/* Media Queries para dispositivos menores */
+@media (max-width: 768px) {
+  body {
+    grid-template-rows: 70px 1fr 60px;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+  }
+
+  main .message {
+    max-width: 90%;
+  }
+
+  footer input[type="text"] {
+    width: 75%;
+  }
+}
